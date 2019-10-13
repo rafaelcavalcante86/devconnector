@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const auth = require('../../middleware/auth');
-const { check, validationResult } = require('express-validator');
+const { check } = require('express-validator');
 
 const ProfileController = require('../../controllers/profile.controller');
 
@@ -55,5 +55,37 @@ router.put('/experience', [auth, [
     check('from', 'From date is required').not().isEmpty(),
 ]] , ProfileController.addProfileExperience);
 
+/**
+ * @route DELETE api/profile/experience/:expId
+ * @desc Delete profile experience
+ * @access Private
+ */
+router.delete('/experience/:expId', auth, ProfileController.deleteProfileExperience);
+
+/**
+ * @route PUT api/profile/education
+ * @desc Add profile education
+ * @access Private
+ */
+router.put('/education', [auth, [  
+    check('school', 'School is required').not().isEmpty(),
+    check('degree', 'Degree is required').not().isEmpty(),
+    check('fieldofstudy', 'Field of study is required').not().isEmpty(),
+    check('from', 'From date is required').not().isEmpty(),
+]] , ProfileController.addProfileEducation);
+
+/**
+ * @route DELETE api/profile/education/:eduId
+ * @desc Delete profile education
+ * @access Private
+ */
+router.delete('/education/:eduId', auth, ProfileController.deleteProfileEducation);
+
+/**
+ * @route GET api/profile/github/:username
+ * @desc Get user repositories from github
+ * @access Public
+ */
+router.get('/github/:username', ProfileController.getGithubRepositories);
 
 module.exports = router;
