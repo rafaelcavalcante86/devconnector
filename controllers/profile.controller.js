@@ -354,7 +354,7 @@ class ProfileController {
 
             request(options, (error, response, body) => {
                 if (error) console.error(error.message);
-console.log(options);
+
                 if (response.statusCode !== 200) {
                     return res.status(404).json({ errors: [{ msg: 'No Github profile found.' }] });
                 }

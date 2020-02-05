@@ -12,8 +12,7 @@ const Dashboard = ({ getCurrentProfile, deleteAccount, auth: { user }, profile: 
 
   useEffect(() => {
     getCurrentProfile();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [getCurrentProfile]);
 
   return loading && profile === null ? <Spinner/> : <Fragment>
     <h1 className="large text-primary">
